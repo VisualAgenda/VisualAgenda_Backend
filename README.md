@@ -1,64 +1,50 @@
-VisualAgenda Backend
-This is the backend component of VisualAgenda, a web application for managing meetings and timeslots visually. The backend provides APIs to create, retrieve, update, and delete meetings, timeslots, and comments.
+# VisualAgenda_Backend
 
-Prerequisites
-To run this application, you need to have the following installed:
+Dies ist das Backend für die Visual Agenda-Anwendung. Es handelt sich um eine RESTful API, die mit Express.js und MySQL entwickelt wurde.
 
-Node.js
-npm (Node Package Manager)
-PostgreSQL
-Installation
-Clone the repository:
+## Inhaltsverzeichnis
 
-bash
-Copy code
-git clone <repository-url>
-Navigate to the project directory:
+- [Voraussetzungen](#voraussetzungen)
+- [Installation](#installation)
+- [Datenbank-Konfiguration](#datenbank-konfiguration)
+- [Verwendung](#verwendung)
+- [API-Endpunkte](#api-endpunkte)
 
-bash
-Copy code
-cd VisualAgenda_Backend
-Install the dependencies:
+## Voraussetzungen
 
-bash
-Copy code
-npm install
-Set up the PostgreSQL database:
+Um das Backend ausführen zu können, benötigen Sie die folgenden Voraussetzungen:
 
-Create a new PostgreSQL database.
-Update the database configuration in the prisma/.env file.
-Apply database migrations:
+- Node.js (Version 12 oder höher)
+- MySQL-Datenbank
 
-bash
-Copy code
-npx prisma migrate dev
-Start the application:
+## Installation
 
-bash
-Copy code
-npm start
-The backend server will start running at http://localhost:3000.
+1. Klone das Repository auf deinen lokalen Computer.
+2. Navigiere in das Verzeichnis des Projekts.
+3. Führe den Befehl `npm install` aus, um die Abhängigkeiten zu installieren.
 
-Usage
-The backend provides the following API endpoints:
+## Datenbank-Konfiguration
 
-Meetings
-POST /meetings: Create a new meeting.
-GET /meetings: Retrieve all meetings.
-GET /meetings/:link: Retrieve a single meeting by link.
-PUT /meetings/:link: Update a meeting by link.
-DELETE /meetings/:link: Delete a meeting by link.
-Timeslots
-POST /timeslots/:meetingLink: Create a new timeslot for a meeting.
-GET /timeslots/:meetingLink: Retrieve all timeslots for a meeting.
-GET /timeslots/:timeslotId: Retrieve a single timeslot by ID.
-PUT /timeslots/:timeslotId: Update a timeslot by ID.
-DELETE /timeslots/:timeslotId: Delete a timeslot by ID.
-Comments
-POST /comments/:timeslotId: Create a new comment for a timeslot.
-GET /comments/:timeslotId: Retrieve all comments for a timeslot.
-GET /comments/:timeslotId/:commentId: Retrieve a single comment by ID for a timeslot.
-PUT /comments/:commentId: Update a comment by ID.
-DELETE /comments/:commentId: Delete a comment by ID.
-Make requests to these endpoints using your preferred HTTP client (e.g., cURL, Postman, or a web browser extension).
+1. Stelle sicher, dass du eine MySQL-Datenbank eingerichtet hast.
+2. Öffne die Datei `server.js` und passe die Verbindungsinformationen für die MySQL-Datenbank an (Host, Benutzername, Passwort, Datenbankname).
 
+## Verwendung
+
+1. Führe den Befehl `npm start` aus, um den Server zu starten. Der Server wird auf Port 3000 gestartet.
+2. Verwende eine API-Testanwendung wie Postman oder cURL, um die verschiedenen API-Endpunkte zu testen.
+
+## API-Endpunkte
+
+- `POST /meetings`: Erstellt ein neues Meeting.
+- `GET /meetings`: Ruft alle Meetings ab.
+- `GET /meetings/:id`: Ruft ein einzelnes Meeting anhand der ID ab.
+- `PUT /meetings/:id`: Aktualisiert ein Meeting.
+- `DELETE /meetings/:id`: Löscht ein Meeting.
+- `POST /timeslots`: Erstellt einen neuen Timeslot.
+- `GET /timeslots/:meeting_id`: Ruft alle Timeslots eines Meetings ab.
+- `PUT /timeslots/:id`: Aktualisiert einen Timeslot.
+- `DELETE /timeslots/:id`: Löscht einen Timeslot.
+- `POST /comments`: Erstellt einen neuen Comment.
+- `GET /comments/:timeslot_id`: Ruft alle Comments eines Timeslots ab.
+- `PUT /comments/:id`: Aktualisiert einen Comment.
+- `DELETE /comments/:id`: Löscht einen Comment.
