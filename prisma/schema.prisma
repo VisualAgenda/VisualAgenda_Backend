@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model comments {
+  comment_id  Int       @id @default(autoincrement())
+  timeslot_id Int
+  comment     String    @db.Text
+  timeslots   timeslots @relation(fields: [timeslot_id], references: [timeslot_id], onDelete: Cascade, onUpdate: NoAction, map: "comments_ibfk_1")
+
+  @@index([timeslot_id], map: "timeslot_id")
+}
+
+model meetings {
+  meeting_id Int         @id @default(autoincrement())
+  name       String      @db.VarChar(255)
+  start_date DateTime    @db.Date
+  admin_link String      @db.VarChar(255)
+  user_link  String      @db.VarChar(255)
+  timeslots  timeslots[]
+}
+
+model timeslots {
+  timeslot_id Int        @id @default(autoincrement())
+  meeting_id  Int
+  topic       String     @db.VarChar(255)
+  start_time  DateTime   @db.Time()
+  end_time    DateTime   @db.Time()
+  comments    comments[]
+  meetings    meetings   @relation(fields: [meeting_id], references: [meeting_id], onDelete: Cascade, onUpdate: NoAction, map: "timeslots_ibfk_1")
+
+  @@index([meeting_id], map: "meeting_id")
+}
