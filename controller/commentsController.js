@@ -34,7 +34,7 @@ async function createComment(req, res) {
         await prisma.comments.create({
             data: {
                 comment,
-                timeslot: {
+                timeslots: {
                     connect: {timeslot_id: timeslotId},
                 },
             },
@@ -113,7 +113,7 @@ async function deleteComment(req, res) {
     }
 }
 
-async function getCommentForTimeslot(req, res) {
+async function getCommentWithId(req, res) {
     const link = req.params.link;
     const timeslotId = parseInt(req.params.timeslotId);
     const commentId = parseInt(req.params.commentId);
@@ -149,5 +149,5 @@ module.exports = {
     createComment,
     getAllComments,
     deleteComment,
-    getCommentForTimeslot,
+    getCommentWithId,
 };
