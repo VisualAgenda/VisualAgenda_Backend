@@ -19,7 +19,7 @@ async function createMeeting(req, res) {
 
     res.status(201).json({
       message: "Meeting erfolgreich erstellt",
-      meetingId: meeting.meeting_id,
+      meeting: meeting,
     });
   } catch (error) {
     console.error(error);
