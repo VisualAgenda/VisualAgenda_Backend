@@ -10,8 +10,10 @@ datasource db {
 model comments {
   comment_id  Int       @id @default(autoincrement())
   timeslot_id Int
+  meeting_id  Int       // Neues Feld, um die Beziehung zu Meetings herzustellen
   comment     String    @db.Text
   timeslots   timeslots @relation(fields: [timeslot_id], references: [timeslot_id], onDelete: Cascade, onUpdate: NoAction, map: "comments_ibfk_1")
+  meetings    meetings  @relation(fields: [meeting_id], references: [meeting_id], onDelete: Cascade, onUpdate: NoAction) // Neue Beziehung zu Meetings
 
   @@index([timeslot_id], map: "timeslot_id")
 }
@@ -23,6 +25,7 @@ model meetings {
   admin_link String      @db.VarChar(255)
   user_link  String      @db.VarChar(255)
   timeslots  timeslots[]
+  comments   comments[]  // Neue Beziehung zu Comments
 }
 
 model timeslots {
